@@ -1,4 +1,5 @@
-def f(x): return 2*x*x - 3*x - 19
+# Function to integrate/differentiate/newtons method
+def f(x): return 4 - (16-x**2)**(1/2)
 
 def integrate(f, a, b, n=10000):
     # Integrates a function f via midpoint Reimann Summation, on the interval [a, b] using n partitions.
@@ -25,3 +26,23 @@ def newtons_method(f, guess, iterations=100):
     for _ in range(iterations):
         root = root - f(root)/differenciate(f, root)
     return root
+
+# Function that describes differential equation for eulers method (dy/dx = g(x, y)  is satisfied, only first order DEs)
+def g(x, y): return y 
+
+def eulers_method(f, x_initial, y_initial, x_final, step=0.05):
+    x = x_initial
+    y = y_initial
+    dydx = f(x, y)
+    while x < x_final:
+        y = dydx*step + y
+        x += step
+        dydx = f(x, y)
+    return y
+
+
+# Approximates eulers number by evaluating e^x at x=1 using the differential equation dy/dx = y with initial condition y(0)=1
+print(eulers_method(g, 0, 1, 1, 0.0001))
+
+
+
